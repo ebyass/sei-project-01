@@ -15,27 +15,35 @@ body {
 }
 
 .grid-wrapper {
-  height: 90vh;
+	height: 90vh;
   display: flex;
   justify-content: center;
 }
 
 .grid {
-  align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+	align-items: center;
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 600px;
-  width: 600px;
+  height: 700px;
+  width: 700px; 
 }
 
 .grid div {
   border: 1px solid lightgrey;
   flex-grow: 1;
-  height: 10%;
-  width: 10%;
+  height: 6.5%; 
+	width: 6.5%;
+}
+
+#start {
+	background-color: hotpink;
+	color: white;
+	height: 30px;
+	width: 150px;
+	border-radius: 10px;
 }
 
 .grid div.player {
@@ -45,9 +53,25 @@ body {
   cursor: pointer;
 }
 
-.grid div.lazer {
-	height: 20vh;
-	width: 20vh;
-	background-color: greenyellow;
-	box-shadow: 40px rgba(153, 255, 40, 0.2);
+
+.grid div.invader {
+	background-color: orange;
+	border-radius: 10px;
 }
+
+.grid div.collision {
+	background-color: black;
+}
+/* 
+.grid div.lazer {
+	background-color: brown;
+	height: 30px;
+	width: 30px;
+} */
+
+#shooterLazer {
+	background-color: red;
+	height: 30px;
+	width: 30px;
+}
+
