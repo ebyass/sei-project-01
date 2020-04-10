@@ -4,7 +4,7 @@ function init() {
 
   const grid = document.querySelector('.grid')
   const cells = []
-  let score = document.querySelector('#score-display')
+  const score = document.querySelector('#score-display')
   const start = document.querySelector('#start')
 
 
@@ -12,10 +12,24 @@ function init() {
   const width = 15
   const cellCount = width * width
   let shooterPosition = 217
+  console.log(shooterPosition)
+  const starterPosition = 217
+  const lazerPosition = shooterPosition - width
+  console.log(lazerPosition)
+	
   // let invaderIndex
   // const alienInvadersKilled = []
-  score = 10
-  console.log(score)
+  // score = 10
+  // console.log(score)
+	
+  const aliens = [
+    47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 
+    62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72,
+    77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87,
+    92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102
+  ]
+	
+
 
   //* Execution 
 
@@ -31,9 +45,13 @@ function init() {
 	
 	
   function startGame() {
-    if (start) {
-      cells[shooterPosition].classList.add('player')
+    if (event.target === start) {
+      cells[starterPosition].classList.add('player')
     }
+    aliens.forEach(alien => {
+      cells[alien].classList.add('invader')
+    })
+		
   }
 
 
@@ -48,19 +66,18 @@ function init() {
         if (x > 0) shooterPosition --
         break
       case 32:
-      
-        // const lazer = document.createElement('div')
-        // lazer.id = 'shooterLazer'
-        // lazer.textcontent = 'freakin lazer beam'
-        // cells.appendChild(lazer)
-        // console.log(lazer)
-        // lazer[lazerPosition].classList.add('lazer')
-        
+        console.log('this is the lazer shoot')
+        lazerBeam()
+        break
     }
     cells[shooterPosition].classList.add('player')
   }
     
-  
+  function lazerBeam() {
+    cells[lazerPosition].classList.add('lazer')
+    
+
+  }
 
 
 

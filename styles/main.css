@@ -62,12 +62,10 @@ body {
 .grid div.collision {
 	background-color: black;
 }
-/* 
+
 .grid div.lazer {
 	background-color: brown;
-	height: 30px;
-	width: 30px;
-} */
+}
 
 #shooterLazer {
 	background-color: red;
