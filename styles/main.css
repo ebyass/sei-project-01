@@ -67,5 +67,11 @@ body {
 	background-color: brown;
 }
 
+.grid div.blast {
+	background-color: yellow;
+}
 
+.grid div.block {
+	background-color: teal;
+}
 
