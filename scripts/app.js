@@ -31,7 +31,7 @@ function init() {
   ]
   
   const blocks = [
-    154, 155, 169, 170, 157, 158, 172, 173, 160, 161, 175, 176
+    152, 153, 167, 168, 161, 162, 176, 177, 156, 157, 158, 171, 172, 172, 173
   ]
 
 
@@ -76,135 +76,48 @@ function init() {
     }
     cells[shooterIndex].classList.add('player')
   }
+	
+  console.log(shooterIndex)
 
-  let invaderIndex = aliens[0]
+  let invaderIndex = 0
   const timerId = setInterval(() => {
-    console.log(invaderIndex)
-    invaderIndex ++
-    if (invaderIndex > aliens.length) {
+    
+    setTimeout(() => {
+      aliens.forEach(item =>{
+        cells[item].classList.remove('invader')
+        invaderIndex = item --
+        cells[item].classList.add('invader')
+      })
+    }, 2000)
+    setTimeout(() => {
+      aliens.forEach(item =>{
+        cells[item].classList.remove('invader')
+        invaderIndex = item ++
+        cells[item].classList.add('invader')
+      })
+    }, 4000)
+    setTimeout(() => {
+      aliens.forEach(item =>{
+        cells[item].classList.remove('invader')
+        invaderIndex = item ++
+        cells[item].classList.add('invader')
+      })
+    }, 6000)
+    setTimeout(() => {
+      aliens.forEach(item =>{
+        cells[item].classList.remove('invader')
+        invaderIndex = item + width
+        cells[item].classList.add('invader')
+      })
+    }, 8000)
+    if (invaderIndex > 50000) {
       clearInterval(timerId)
+      console.log('timer has stopped')
     }
-		
-		
-	
   }, 2000)
-
-
-		
-  function moveInvaders () {
-		
-    //  const leftEdge = aliens[0] % width === 0
-    //  const rightEdge = aliens[aliens.length - 1] % width === width - 1
-    //  let x = aliens[0] & width
-    //  let y = Math.floor(aliens[0] / width)
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.add('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.remove('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      aliens[i] += width
-      console.log('move down')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.add('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.remove('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      aliens[i] --
-      console.log('move left')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.add('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.remove('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      aliens[i] ++
-      console.log('move right')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.add('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.remove('invader')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      aliens[i] ++
-      console.log('move right')
-    }
-    for (let i = 0; i <= aliens.length - 1; i++) {
-      cells[aliens[i]].classList.add('invader')
-    }
-  }
- 
-		
-			
-  //     aliens.forEach(item => {
-  //       cells[item].classList.remove('invader')
-  //       console.log('invaders move right')
-  //       item ++
-  //       cells[item].classList.add('invader')
-  //     })
-			
-  //     aliens.forEach(item => {
-  //       cells[item].classList.remove('invader')
-  //       console.log('invaders move right')
-  //       item ++
-  //       cells[item].classList.add('invader')
-  //     })
-			
-  //     aliens.forEach(item => {
-  //       cells[item].classList.remove('invader')
-  //       console.log('right again!')
-  //       item ++
-  //       cells[item].classList.add('invader')
-  //     })
-			
-  //     aliens.forEach(item => {
-  //       cells[item].classList.remove('invader')
-  //       console.log('back left!')
-  //       item --
-  //       cells[item].classList.add('invader')
-  //     })
-			
-  //     aliens.forEach(item => {
-  //       cells[item].classList.remove('invader')
-  //       console.log('left again!')
-  //       item --
-  //       cells[item].classList.add('invader')
-  //     })
-  //   },2000)
 	
-  // setTimeout(() => {
-  //   clearInterval(mvngAliens)
-  //   console.log('aliens should stop moving')
-  // },10000)
-  // }
+  //* The lazer Beam
 	
-  
-
-  // function aliensMove() {
-  //   aliens.forEach(item => {
-  //     // cells[item].classList.add('invader')
-  //     console.log('this is the aliens move fucntion')
-  //     // cells[item].classList.remove('invader')
-      
-  //     // cells[item] --
-  //     // cells[item].classList.add('invader')
-  //   })
-  // }
-	
-
-
-
-
-
-
   
     
   // function lazerBeam(event) {
@@ -218,22 +131,7 @@ function init() {
   // }
   // lazerBeam()
 
-  // function aliensMove() {
-  //   const aliensMove = setInterval(() => {
-  //     console.log('aliens should be moving down')
-  //     aliens.forEach(alien => {
-  //       console.log(alien)
-  //       cells[alien].classList.remove('invader')
-  //       alien -= width
-  //       cells[alien].classList.add('invader')
-  //     })
-  //   }, 2000)
-		
-  //   setTimeout(() => {
-  //     clearInterval(aliensMove)
-  //     console.log('aliens should stop moving')
-  //   }, 5000)
-  // }
+
 
   // class AlienInvader {
   //   constructor(name, points){
