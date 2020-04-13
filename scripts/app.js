@@ -13,13 +13,8 @@ function init() {
   const width = 15
   const cellCount = width * width
   let shooterIndex = 217
-  
-
- 
-  // const lazerPosition = shooterIndex -= width
-  // console.log(lazerPosition)
-	
-  // const alienInvadersKilled = []
+  const lazerShots = []
+  const alienInvadersKilled = []
   
   
 	
@@ -66,18 +61,38 @@ function init() {
     const x = shooterIndex % width
     switch (event.keyCode) {
       case 39:
-        if (x < width - 1) shooterIndex ++
+        if (x < width - 1) 
+          shooterIndex = shooterIndex + 1
         break
       case 37: 
-        if (x > 0) shooterIndex --
+        if (x > 0) shooterIndex = shooterIndex - 1
         break
       default:
-        console.log('wrong key')
+        console.log(shooterIndex)
     }
     cells[shooterIndex].classList.add('player')
   }
 	
-  console.log(shooterIndex)
+ 
+	
+  function moveLazerBeam(event) {
+    const lazerPosition = (shooterIndex - width)
+    if ((event.keyCode === 32)) {
+      console.log(lazerPosition)
+      cells[lazerPosition].classList.add('lazer')
+      lazerShots.push(lazerPosition)
+      console.log(lazerShots)
+    }
+  }
+
+  setTimeout(() => {
+    console.log('I am the function with no name')
+    console.log('I get called after 3 seconds')
+    console.log('I execute any function calls I find inside my brackets')
+    moveLazerBeam(event)
+  }, 3000)
+	
+  // function moveAliens()
 
   let invaderIndex = 0
   const timerId = setInterval(() => {
@@ -116,38 +131,7 @@ function init() {
     }
   }, 2000)
 	
-  //* The lazer Beam
-	
-  
-    
-  // function lazerBeam(event) {
-  //   for (let i = 0; i < shooterIndex; i++) {
-  //     console.log('adding lazer')
-  //     if (event.keyCode(32)) {
-  //       cells[lazerPosition].classList.add('lazer')
-  //     }
-  //     cells[lazerPosition].classList.remove('lazer')
-  //   }
-  // }
-  // lazerBeam()
 
-
-
-  // class AlienInvader {
-  //   constructor(name, points){
-  //     this.name = name 
-  //     this.points = points
-  //   }
-  //   aliensMove() {
-  //     console.log('aliens move function called')
-  //   }
-  // }
-  
-  // cells.appendChild(newAlien)
-  // newAlien = 107
-  // cells[newAlien].classList.add('invader')
-
- 
 
   //* End Game 
 
@@ -167,7 +151,7 @@ function init() {
   startGame()
   start.addEventListener('click', startGame)
   document.addEventListener('keydown', moveShooter)
-  // document.addEventListener('keydown', lazerBeam)
+  document.addEventListener('keydown', moveLazerBeam)
   // document.addEventListenter('keydown', lazerBeam)
 	
 	
