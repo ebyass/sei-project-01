@@ -13,7 +13,6 @@ function init() {
   const width = 15
   const cellCount = width * width
   let shooterIndex = 217
-  const lazerShots = []
   const alienInvadersKilled = []
   let result = 0
   
@@ -40,7 +39,6 @@ function init() {
       cells.push(cell)
     }
   }
-	
   createGrid()
 	
 	
@@ -73,32 +71,34 @@ function init() {
     cells[shooterIndex].classList.add('player')
   }
 	
- 
 	
-  function moveLazerBeam(event) {
+  function moveLazerBeam() {
     let lazerIndex = (shooterIndex - width)
     let lazerId 
 
-    function moveLazerUp() {
+    function moveLazerUp(event) {
       cells[lazerIndex].classList.remove('lazer')
       lazerIndex -= width 
       cells[lazerIndex].classList.add('lazer')
       if (cells[lazerIndex].contains('invader')) {
         cells[lazerIndex].classList.remove('invader')
         cells[lazerIndex].classList.remove('lazer')
+        cells[lazerIndex].classList.add('blast')
+
+        setTimeout(() => cells[lazerIndex].remove('blast'), 300)
+        clearInterval(lazerId)
+
+        const alienKilled = aliens.indexOf(lazerIndex)
+        alienInvadersKilled.push(alienKilled)
+        result = + 500
+        score.textContent = result
       }
-      cells[lazerIndex].classList.add('boom')
-			
-      setTimeout(() => {
-        cells[lazerIndex].classList.remove('boom')
-      }, 250)
-      clearInterval(lazerId)
-			
-      const alienKilled = aliens.indexOf(lazerIndex)
-      alienInvadersKilled.push(alienKilled)
-      result = + 500
-      score.textContent = result
     }
+    document.addEventListener('keydown', event => {
+      if (event.keyCode === 32) {
+        lazerId = setInterval(moveLazerUp, 1000)
+      } 
+    })
   }
   
   
