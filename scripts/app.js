@@ -14,7 +14,7 @@ function init() {
   const cellCount = width * width
   let shooterIndex = 217
   const alienInvadersKilled = []
-  let result = 0
+  const result = 0
   
 	
   const aliens = [
@@ -54,6 +54,13 @@ function init() {
     })
   }
 
+
+
+
+
+
+
+
   function moveShooter(event){
     cells[shooterIndex].classList.remove('player')
     const x = shooterIndex % width
@@ -71,95 +78,153 @@ function init() {
     cells[shooterIndex].classList.add('player')
   }
 	
+
+
+
+
+
+
+
 	
   function moveLazerBeam() {
+
     let lazerIndex = (shooterIndex - width)
-    let lazerId 
-   
-    function moveLazerUp(event) {
-      cells[lazerIndex].classList.add('lazer')
-      
-      const x = lazerIndex % width
-      const y = Math.floor(lazerIndex / width)
-			
-      switch (event.keyCode) {
-        case 32:
-          if (y > 0) {
-            cells[lazerIndex].classList.remove('lazer')
-            lazerIndex -= width 
-            cells[lazerIndex].classList.add('lazer')
-            lazerId = setInterval(moveLazerUp, 100)
-          }
-          break
-        default:
-          return
-      }
-    }
-					
-    const alienKilled = aliens.indexOf(lazerIndex)
-    cells[lazerId].classList.remove('lazer')
-    cells[lazerId].classList.remove('invader')
-    alienInvadersKilled.push(alienKilled)
-    result = + 500
-    score.textContent = result
+    
+    const y = Math.floor(lazerIndex / width)
 		
-  }
-         
+    switch (event.keyCode) {
+      case 32:
+        cells[lazerIndex].classList.add('lazer')
+        break 
+      default:
+        return
+    }
+		
+    const lazerId = setInterval(() => {
+      moveLazerUp(event)
+      console.log('moveLazerUp function should be called')
       
-      
+    }, 250)
 
-  
+    function moveLazerUp(event) {
 
-    
-  
-  
-    
-  // if (cells[lazerId].classList.contains('block', 'lazer')) {
-  //   cells[lazerId].classList.remove('lazer')
-  // } else if (cells[lazerId].classList.contains('invader', 'lazer')) {
-  //   cells[lazerId].classList.remove('lazer')
-  //   cells[lazerId].classList.remove('invader')
+      if (y > 0) {
+        cells[lazerIndex].classList.remove('lazer')
+        console.log('lazer beam should be removed')
+        console.log('Has lazer reached the top?')
+      } else {
+        clearInterval(lazerId)
+      }
 			
-  // }
-  
-  
-  // function moveAliens()
+      cells[lazerIndex].classList.remove('lazer')
+      lazerIndex -= width 
+      cells[lazerIndex].classList.add('lazer')	
+    }
 
-  let invaderIndex = aliens.indexOf()
-  const timerId = setInterval(() => {
+
+
+  }
+
+
+  
+  // if (cells[aliens[0]].classList.contains(lazerIndex)) {
+  // 	cells[lazerId].classList.remove('lazer')
+  // 	cells[lazerId].classList.remove('invader')
+  // 	score = + 500
+  // 	score.textContent = result
+  // } else if (cells[aliens[0]].classList.contains('block', 'lazer')){
+  // 	cells[lazerIndex].classList.remove('lazer')
+  // }
+				
+      
     
-    setTimeout(() => {
-      aliens.forEach(item =>{
-        cells[item].classList.remove('invader')
-        invaderIndex = item --
-        cells[item].classList.add('invader')
-      })
-    }, 2000)
-    cells[invaderIndex].classList.remove('invader')
-    setTimeout(() => {
-      aliens.forEach(item =>{
-        cells[item].classList.remove('invader')
-        invaderIndex = (item + width)
-        cells[item].classList.add('invader')
-      })
-    }, 4000)
-    cells[invaderIndex].classList.remove('invader')
-    setTimeout(() => {
-      aliens.forEach(item =>{
-        cells[item].classList.remove('invader')
-        invaderIndex = (item ++)
-        cells[item].classList.add('invader')
-      })
-    }, 6000)
-    cells[invaderIndex].classList.remove('invader')
-    setTimeout(() => {
-      aliens.forEach(item =>{
-        cells[item].classList.remove('invader')
-        invaderIndex = item + width
-        cells[item].classList.add('invader')
-      })
-    }, 8000)
-  }, 2000)
+		
+
+
+    
+        
+    
+		
+
+		
+  
+    
+	
+
+	
+  // const alienKilled = aliens.indexOf(lazerIndex)
+  // alienInvadersKilled.push(alienKilled)
+  // function moveAliens()
+	
+  
+  let invaderIndex 
+  function moveInvaders() {
+    
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      invaderIndex = item --
+      cells[item].classList.add('invader')
+    })
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      invaderIndex = item ++
+      cells[item].classList.add('invader')
+    })
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      invaderIndex = item ++
+      cells[item].classList.add('invader')
+    })
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      invaderIndex = item -= width
+      cells[item].classList.add('invader')
+    })
+  }
+
+  const timerId = setInterval(() => {
+    moveInvaders()
+    invaderIndex ++
+  }, 1000)
+
+
+
+
+  // let invaderIndex = 0
+  // const timerId = setInterval(() => {
+    
+  //   setTimeout(() => {
+  //     aliens.forEach(item =>{
+  //       cells[item].classList.remove('invader')
+  //       invaderIndex = item --
+  //       cells[item].classList.add('invader')
+  //     })
+  //   }, 2000)
+  //   // cells[invaderIndex].classList.remove('invader')
+  //   setTimeout(() => {
+  //     aliens.forEach(item =>{
+  //       cells[item].classList.remove('invader')
+  //       invaderIndex = (item + width)
+  //       cells[item].classList.add('invader')
+  //     })
+  //   }, 4000)
+  //   // cells[invaderIndex].classList.remove('invader')
+  //   setTimeout(() => {
+  //     aliens.forEach(item =>{
+  //       cells[item].classList.remove('invader')
+  //       invaderIndex = (item ++)
+  //       cells[item].classList.add('invader')
+  //     })
+  //   }, 6000)
+  //   // cells[invaderIndex].classList.remove('invader')
+  //   setTimeout(() => {
+  //     aliens.forEach(item =>{
+  //       cells[item].classList.remove('invader')
+  //       invaderIndex = item + width
+  //       cells[item].classList.add('invader')
+  //     })
+  //   }, 8000)
+  // }, 2000)
 	
   //* Points lost or scored 
   //* Might need to change it to lazerId not lazerIndex
@@ -199,8 +264,8 @@ function init() {
   start.addEventListener('click', startGame)
   document.addEventListener('keydown', moveShooter)
   document.addEventListener('keydown', moveLazerBeam)
-  cells.forEach(cell => cell.addEventListener('keydown', moveLazerUp))
-	
+  // document.addEventListener('keydown', moveLazerUp)
+  // cells.forEach(cell => cell.addEventListener('keydown', moveLazerUp))	
 }	
 
 window.addEventListener('DOMContentLoaded', init)
