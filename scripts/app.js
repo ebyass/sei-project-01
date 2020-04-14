@@ -14,7 +14,7 @@ function init() {
   const cellCount = width * width
   let shooterIndex = 217
   const alienInvadersKilled = []
-  const result = 0
+  let result = 0
   
 	
   const aliens = [
@@ -90,11 +90,12 @@ function init() {
 
     let lazerIndex = (shooterIndex - width)
     
-    const y = Math.floor(lazerIndex / width)
+
 		
     switch (event.keyCode) {
       case 32:
         cells[lazerIndex].classList.add('lazer')
+        console.log('lazer added')
         break 
       default:
         return
@@ -103,29 +104,66 @@ function init() {
     const lazerId = setInterval(() => {
       moveLazerUp(event)
       console.log('moveLazerUp function should be called')
-      
     }, 250)
 
     function moveLazerUp(event) {
 
-      if (y > 0) {
-        cells[lazerIndex].classList.remove('lazer')
-        console.log('lazer beam should be removed')
-        console.log('Has lazer reached the top?')
-      } else {
-        clearInterval(lazerId)
-      }
-			
       cells[lazerIndex].classList.remove('lazer')
       lazerIndex -= width 
-      cells[lazerIndex].classList.add('lazer')	
+      console.log(lazerIndex)
+      cells[lazerIndex].classList.add('lazer')
+			
+      if (lazerIndex === 0 || lazerIndex === 1 || lazerIndex === 2 || lazerIndex === 3 || lazerIndex === 4 || lazerIndex === 5 || lazerIndex === 6 || lazerIndex === 7 || lazerIndex === 8 || lazerIndex === 9 || lazerIndex === 10 || lazerIndex === 11 || lazerIndex === 12 || lazerIndex === 13 || lazerIndex === 14) {
+        cells[lazerIndex].classList.remove('lazer')
+        clearInterval(lazerId)
+      } else if (cells[lazerIndex].classList.contains('invader')){
+        cells[lazerIndex].classList.remove('lazer')
+        cells[lazerIndex].classList.remove('invader')
+        cells[lazerIndex].classList.add('blast')
+        result = + 500
+        score.textContent = result
+				
+        const aliensKilled = aliens.indexOf(lazerIndex)
+        aliens.pop(aliensKilled)
+        console.log(aliens.length)
+        alienInvadersKilled.push(aliensKilled)
+        console.log(alienInvadersKilled)
+        clearInterval(lazerId)
+				
+        setTimeout(() => {
+          cells[lazerIndex].classList.remove('blast')
+        }, 500)
+        clearInterval(lazerId)
+      } else if (cells[lazerIndex].classList.contains('block')) {
+        clearInterval(lazerId)
+      } else if (cells[lazerIndex].classList.contains('alien-lazer')) {
+        cells[lazerIndex].classList.remove('lazer')
+        cells[lazerIndex].classList.remove('alien-lazer')
+      }
+      
     }
-
-
-
+    // collision()
   }
+	
+  
+  // function collision () {
+   
+  //   if (cells.classList.contains('invader') && cells.classList.contains('lazer')) {
+  //     cells.classList.remove('invader')
+  //     console.log('alien has been hit!')
+  //   }
+    
+  // }
 
 
+  // if (cells[aliens].classList.contains('lazer')) {
+  //   aliens.forEach(item => {
+  //     cells[aliens].classList.remove('invader')
+  //     alienInvadersKilled.push(item)
+  //     console.log(alienInvadersKilled)
+  //     clearInterval(lazerId)
+  //   })
+  // }
   
   // if (cells[aliens[0]].classList.contains(lazerIndex)) {
   // 	cells[lazerId].classList.remove('lazer')
@@ -156,36 +194,42 @@ function init() {
   // alienInvadersKilled.push(alienKilled)
   // function moveAliens()
 	
+  //* Move the alien invaders
   
   let invaderIndex 
   function moveInvaders() {
     
     aliens.forEach(item => {
       cells[item].classList.remove('invader')
-      invaderIndex = item --
+      console.log(`this is the item ${item}`)
+      item -= 1
+      console.log(`new item ${item}`)
+      cells[item].classList.add('invader')
+      console.log(`invader index is ${item}`)
+    })
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      console.log(`move right from ${item}`)
+      item += 1
+      console.log(`NEW ITEM ${item}`)
+      cells[item].classList.add('invader')
+      console.log(`INVADER INDEX IS NOW ${item}`)
+    })
+    aliens.forEach(item => {
+      cells[item].classList.remove('invader')
+      item += 1
       cells[item].classList.add('invader')
     })
     aliens.forEach(item => {
       cells[item].classList.remove('invader')
-      invaderIndex = item ++
-      cells[item].classList.add('invader')
-    })
-    aliens.forEach(item => {
-      cells[item].classList.remove('invader')
-      invaderIndex = item ++
-      cells[item].classList.add('invader')
-    })
-    aliens.forEach(item => {
-      cells[item].classList.remove('invader')
-      invaderIndex = item -= width
+      item += width
       cells[item].classList.add('invader')
     })
   }
 
   const timerId = setInterval(() => {
     moveInvaders()
-    invaderIndex ++
-  }, 1000)
+  }, 4000)
 
 
 
@@ -226,8 +270,7 @@ function init() {
   //   }, 8000)
   // }, 2000)
 	
-  //* Points lost or scored 
-  //* Might need to change it to lazerId not lazerIndex
+
 
   
 
