@@ -3,21 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>SPACE INVADERS</title>
 	<link rel="stylesheet" href="styles/main.css">
 	<script src="scripts/app.js" charset="UTF-8"></script>
+	<link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div class="title">
+		<h1>SPACE INVIRUS</h1>
+	</div>
+
 	<div class="controls-wrapper">
 
-		<button id="start">Start Whacking!</button>
+		<button class="score-display" id="start">Start Game</button>
 
-		<p>Score: <span id="score-display">0</span></p>
+		<p class="score-display">Score: <span id="score-display"> 0</span></p>
 
 	</div>
 	<div class="grid-wrapper">
 		<div class="grid"></div>
 	</div>
-
+<audio></audio>
 </body>
 </html>
