@@ -17,7 +17,7 @@ function init() {
   const alienInvadersKilled = []
   let result = 0
   let direction = 1
-  const alienLazerIndex = 0
+  let coronaIndex = 29
 
   const invaderIndex = 32
 	
@@ -59,7 +59,7 @@ function init() {
       cells[item].classList.add('invader')
     })
 		
-    setInterval(moveInvaders, 3000)
+    setInterval(moveInvaders, 7000)
 		
     cells[shooterIndex].classList.add('player')
     
@@ -257,6 +257,47 @@ function init() {
     
     addInvaders()
 		
+    const alienLazerTimerId = setInterval(() => {
+      alienLazersMove()
+    }, 1000)
+		
+    let alienLazerIndex =  aliens[Math.floor(Math.random() * aliens.length)]
+    cells[alienLazerIndex].classList.add('alien-lazer')
+    console.log('adding alien lazer')
+		
+    function alienLazersMove() {
+      cells[alienLazerIndex].classList.remove('alien-lazer')
+      alienLazerIndex += width
+      cells[alienLazerIndex].classList.add('alien-lazer')
+			
+      if (cells[alienLazerIndex].classList.contains('block')) {
+        cells[alienLazerIndex].classList.remove('block')
+        cells[alienLazerIndex].classList.add('blast')
+        cells[alienLazerIndex].classList.remove('alien-lazer')
+        clearInterval(alienLazerTimerId)
+        setTimeout(() => {
+          cells[alienLazerIndex].classList.remove('blast')
+        }, 500)
+
+				
+      } else if (cells[alienLazerIndex].classList.contains('lazer')) {
+        cells[alienLazerIndex].classList.remove('alien-lazer')
+        cells[alienLazerIndex].classList.add('blast')
+        cells[alienLazerIndex].classList.remove('lazer')
+        clearInterval(alienLazerTimerId)
+				
+        setTimeout(() => {
+          cells[alienLazerIndex].classList.remove('blast')
+        }, 500)
+				
+      } else if (cells[alienLazerIndex].classList.contains('player')) {
+        console.log('game over')
+        clearInterval(alienLazerTimerId)
+      }
+
+
+    }
+		
 
 
 
@@ -279,10 +320,20 @@ function init() {
     return aliens
   }
 	
-  //* Invaders shoot lazer beams out their freakin heads -------------------------------------------------------------------------------------------------------
+  //* Corona -------------------------------------------------------------------------------------------------------
 	
-
- 
+  function coronaVirus () {
+    cells[coronaIndex].classList.add('corona-alien')
+		
+    function moveCorona() {
+      cells[coronaIndex].classList.remove('corona-alien')
+      coronaIndex -= 1 
+      cells[coronaIndex].classList.add('corona-alien')
+    }
+  }
+  setTimeout(() => {
+    cells[coronaIndex].classList.remove('corona-alien')
+  }, 500)
 
   //* Won Game --------------------------------------------------------------------------------------------------------
 	
@@ -299,6 +350,8 @@ function init() {
     dangerRow.forEach(cell => {
       if (cells[cell].classList.contains('invader')) {
         console.log('game over!')
+        cells[aliens].classList.remove('invader')
+        cells[aliens].classList.remove('player')
       } 
     })
   }
@@ -327,7 +380,6 @@ function init() {
   //* Event Listeners --------------------------------------------------------------------------------------------------------
   
   startBtn.addEventListener('click', startGame)
-	
   document.addEventListener('keydown', moveShooter)
   document.addEventListener('keydown', moveLazerBeam)
   // document.addEventListener('keydown', moveLazerUp)

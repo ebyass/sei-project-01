@@ -146,7 +146,9 @@ margin: auto;
 }
 
 .grid div.corona-alien {
-	background-color: red;
+	background-image: url('../assets/kindpng_1845865.png');
+	background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .grid div.danger-row {
