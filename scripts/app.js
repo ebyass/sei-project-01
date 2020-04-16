@@ -19,7 +19,6 @@ function init() {
   let direction = 1
   let coronaIndex = 29
   let isPlayerDead = false
-  const invaderIndex = 32
   let leadInvader = 0
   let aliens = [ 
     17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
@@ -369,12 +368,17 @@ function init() {
     //   gameOver()
     //   return
     // }
-
-    for (let i = 0; i <= dangerRow.length; i++) {
-      if (cells[i].classList.contains('invader')) {
+    aliens.forEach(item => {
+      if (cells[item].classList.contains('danger-row')) {
         return isPlayerDead = true
       }
-    }
+    })
+    gameOver()
+    // for (let i = 0; i <= dangerRow.length; i++) {
+    //   if (cells[i].classList.contains('invader') && ) {
+    //     return isPlayerDead = true
+    //   }
+    // }
     
   }
 	
