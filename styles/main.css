@@ -6,6 +6,7 @@ body {
   height: 100vh;
 	margin: 0;
 	background-image: url('../assets/sky\ background.png');
+	/* background-image: url('../assets/SecondGIF.gif'); */
 	padding: 50px;
 }
 
@@ -24,10 +25,10 @@ body {
 }
 
 .grid {
-	/* background-image: url('../assets/sky\ background.png'); */
+	background-image: url('../assets/SpaceGIF.gif');
 	align-items: center;
-	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2);
-	background-image: url('../assets/sky\ background.png');
+	/* box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2); */
+	/* background-image: url('../assets/pngwave\ \(1\).png'); */
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -38,7 +39,8 @@ body {
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+	border: 1px solid lightgrey;
+	color: white;
   flex-grow: 1;
   height: 6.5%; 
 	width: 6.5%;
@@ -50,7 +52,10 @@ color: #C04CFD;
 font-family: 'Acme', sans-serif;
 justify-content: center;
 font-size: 50px;
-text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+/* text-shadow: #00EB15 1px 0 10px */
+/* text-shadow: 2px 2px 5px rgb(161, 161, 161); */
+text-shadow: 1px 1px 2px #00EB15, 0 0 25px blue, 0 0 5px darkblue
+/* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 
 .title :hover {
@@ -60,10 +65,12 @@ text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 h1 {
 padding: 10px;
 margin: auto;
+
 }
 
 
 .score-display {
+	
 	background-color: #00EB15;
 	border: 2px solid black;
 	display: flex;
@@ -72,10 +79,10 @@ margin: auto;
 	width: 150px;
 	height: 50px;
 	font-size: 20px;
-	
 	font-family: 'Acme', sans-serif;
 	border-radius: 10px;
 	cursor: pointer;
+	box-shadow: 10px 10px 50px blue;
 	color: black
 }
 
@@ -117,7 +124,7 @@ margin: auto;
 
 
 .grid div.invader {
-	background-image: url('../assets/virus-green.png');
+	background-image: url('../assets/pngwave\ virus.png');
 	border-radius: 10px;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -133,11 +140,15 @@ margin: auto;
 }
 
 .grid div.blast {
-	background-color: yellow;
+	background-image: url('../assets/pngwave.png');
+	background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .grid div.block {
-	background-color: #00EB15;
+	background-image: url('../assets/mask.png');
+	background-repeat: no-repeat;
+  background-size: contain;
 	border-radius: 10px;
 }
 
