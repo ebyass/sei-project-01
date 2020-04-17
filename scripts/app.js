@@ -5,6 +5,7 @@ function init() {
   const grid = document.querySelector('.grid')
   const cells = []
   const score = document.querySelector('#score-display')
+  const scoreBtn = document.querySelector('.score-display')
   const startBtn = document.querySelector('#start')
   const audio = document.querySelector('audio')
 
@@ -30,7 +31,10 @@ function init() {
     152, 153, 167, 168, 161, 162, 176, 177, 156, 157, 158, 171, 172, 172, 173
   ]
 	
-  const dangerRow = [210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224]
+  const dangerRow = [
+    
+    210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224
+  ]
 	
 
 	
@@ -166,9 +170,16 @@ function init() {
       } else if (cells[lazerIndex].classList.contains('corona-alien')) {
         cells[lazerIndex].classList.remove('corona-alien')
         cells[lazerIndex].classList.remove('lazer')
-        coronaTime()
+        cells[lazerIndex].classList.add('blast')
+        audio.src = 'assets/Cowboy Woo Hoo.wav'
+        audio.play()
         result = + 100000
         score.textContent = result 
+        wonGame()
+				
+        setTimeout(() => {
+          cells[lazerIndex].classList.remove('blast')
+        }, 1000)
       }
     }
   }
@@ -182,6 +193,13 @@ function init() {
 
     removeInvaders()
 		
+    const aliensInDangerZone = dangerRow.filter(index => aliens.includes(index))
+    if (aliensInDangerZone.length > 0) {
+      isPlayerDead = true
+      gameOver()
+    }
+
+
     if (leadInvader % width === 3 && direction === 1) {
       direction = width
       wonGame()
@@ -210,7 +228,7 @@ function init() {
 	
   function removeInvaders() {
     
-    return aliens.forEach(item => {
+    aliens.forEach(item => {
       cells[item].classList.remove('invader')
     })
 
@@ -324,46 +342,46 @@ function init() {
   //   }
   // }
 
-  // audio.src = 'assets/Cowboy Woo Hoo.wav'
-  // audio.play()
+ 
  
 
 
   //* Danger Row --------------------------------------------------------------------------------------------------------
 	
   function lastRow() {
-
-    dangerRow.forEach(item => {
-      if (cells[item].classList.contains('invader')) {
-        isPlayerDead = true
-        gameOver()
-      }
+  
+    // dangerRow.forEach(item => {
+    //   if (cells[item].classList.contains('invader')) {
+    //     isPlayerDead = true
+    //     gameOver()
+    // 	}
+		
       
-    })
-    // aliens.forEach(item => {
-    //   if (cells[item].classList.contains('danger-row')) {
-    //     return isPlayerDead = true  
-    //   }
-   
     // })
-	
+    aliens.forEach(item => {
+      if (cells[item].classList.contains('danger-row')) {
+        return isPlayerDead = true  
+      }
+
+    })
+    gameOver()
   }
+
 	
 
 
   //* Won Game --------------------------------------------------------------------------------------------------------
 	
   function wonGame() {
-    if ((aliens.length === 4)) {
+    if ((aliens.length === 4) || (result >= 100000)) {
       score.textContent = 'You Won!'
       score.classList.add('blink')
+      scoreBtn.classList.add('win-lose')
       for (let i = 0; i < 1000; i++) {
         clearInterval(i)
-      }
-    } else if (result >= 100000) {
-      score.textContent = 'Winner!'
-      score.classList.add('blink')
-      console.log('You won!')
+      } 
+      
+    
     }
   }
   
