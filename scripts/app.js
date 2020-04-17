@@ -7,8 +7,7 @@ function init() {
   const score = document.querySelector('#score-display')
   const startBtn = document.querySelector('#start')
   const audio = document.querySelector('audio')
-  const restartBtn = document.querySelector('#restart')
-  const clickedBtn = document.querySelectorAll('.score-display')
+
 
   //* Game Elements --------------------------------------------------------------------------------------------------------
   const width = 15
@@ -19,11 +18,14 @@ function init() {
   let direction = 1
   let coronaIndex = 29
   let isPlayerDead = false
+  
   let leadInvader = 0
   let aliens = [ 
-    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27,
-    32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42
+    17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 
+    32, 33, 34, 35, 36, 37, 38, 39, 40, 41
   ]
+  const alienLazerIndex =  aliens[Math.floor(Math.random() * aliens.length)]
+	
   const blocks = [
     152, 153, 167, 168, 161, 162, 176, 177, 156, 157, 158, 171, 172, 172, 173
   ]
@@ -40,7 +42,7 @@ function init() {
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
-      cell.textContent = i
+      // cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
     }
@@ -55,7 +57,7 @@ function init() {
       cells[item].classList.add('invader')
     })
 		
-    setInterval(moveInvaders, 500)
+    setInterval(moveInvaders, 4000)
 		
     cells[shooterIndex].classList.add('player')
     
@@ -121,14 +123,9 @@ function init() {
 
       cells[lazerIndex].classList.remove('lazer')
       lazerIndex -= width 
+      // wonGame()
       cells[lazerIndex].classList.add('lazer')
 			
-			
-      if (result >= 100000) {
-        score.textContent = 'Winner!'
-        score.classList.add('blink')
-        console.log('You won!')
-      }
 			
       if (lazerIndex === 0 || lazerIndex === 1 || lazerIndex === 2 || lazerIndex === 3 || lazerIndex === 4 || lazerIndex === 5 || lazerIndex === 6 || lazerIndex === 7 || lazerIndex === 8 || lazerIndex === 9 || lazerIndex === 10 || lazerIndex === 11 || lazerIndex === 12 || lazerIndex === 13 || lazerIndex === 14) {
         cells[lazerIndex].classList.remove('lazer')
@@ -166,73 +163,17 @@ function init() {
         cells[lazerIndex].classList.remove('lazer')
         cells[lazerIndex].classList.remove('alien-lazer')
         clearInterval(lazerId)
-      } else if (result >= 100000) {
-        score.textContent = 'Winner!'
-        score.classList.add('blink')
+      } else if (cells[lazerIndex].classList.contains('corona-alien')) {
+        cells[lazerIndex].classList.remove('corona-alien')
+        cells[lazerIndex].classList.remove('lazer')
+        coronaTime()
+        result = + 100000
+        score.textContent = result 
       }
     }
   }
+  
 	
-
-
-  // function moveInvaders() {
-
-  //   const invaderIndex = aliens[0]
-  //   console.log(invaderIndex)
-  //   const x = invaderIndex % width 
-  //   const y = Math.floor(invaderIndex / width)
-		
-  //   aliens.forEach(item => {
-  //     cells[item].classList.remove('invader')
-  //   })
-		
-    
-		
-
-		
-  // if (aliens[0] > width * width - width) {
-  //   console.log('game over')
-  //   gameOver()
-  // }  else if (aliens[0] % width === 3 && direction === 1) {
-  //   direction = width
-  //   console.log('move right')
-  // } else if (aliens[0] % width === 3 && direction === width) {        
-  //   direction = -1
-  //   console.log('move left')
-  // } else if (aliens[0] % width === 0 && direction === -1) {
-  //   direction = width
-  //   console.log('move down')
-  // } else if (aliens[0] % width === 0 && direction === width) {
-  //   direction = 1
-  //   console.log('move')
-  // }
-		
-  //   if (x < width - 1 ) {
-  //     direction = 1
-  //     console.log('move right') 
-  //   } else if (x > 0) {
-  //     direction = -1
-  //     console.log('move left')
-  //   } else if (y > 0) {
-  //     direction = width
-  //     console.log('move down')
-  //   }
-		
-  //   aliens.forEach(item => {
-  //     cells[item].classList.add('invader')
-  //   })
-  // }
-
-  // setInterval(moveInvaders, 2000)
-
-
-
-	
-
-	
-  // aliens.forEach(item => {
-  //   cells[currentAlienIndex + item].classList.add('invader')
-  // })
 	
   //* Invaders Move --------------------------------------------------------------------------------------------------------
 
@@ -243,19 +184,21 @@ function init() {
 		
     if (leadInvader % width === 3 && direction === 1) {
       direction = width
-      
+      wonGame()
       lastRow()
-    } else if (leadInvader % width === 3 && direction === width) {
+    } else if (leadInvader % width === 3 && direction === width)  {
       direction = -1
-    
+      wonGame()
       lastRow()
     } else if (leadInvader % width === 0 && direction === -1) {
       direction = width
-  
+      audio.src = 'assets/Sneezing_AOS01574.wav'
+      audio.play()
+      wonGame()
       lastRow()
     } else if (leadInvader % width === 0 && direction === width) {
       direction = 1
-  
+      wonGame()
       lastRow()
     }
 		
@@ -284,39 +227,16 @@ function init() {
     return aliens
   }
 		
-  // if ((leadInvader >= width * width - width)) {
-  //   isPlayerDead = true
-  //   gameOver()
-  //   clearInterval(alienLazerId)
-  // } else if (direction === 0){
-      
-  //   direction = 1 
-  //   console.log(`lead invader is at ${leadInvader}`)
-  // } else if (leadInvader % width === 3 && direction === 1) {
-  //   direction = width
-  //   // audio.src = 'assets/Sneezing_AOS01574.wav'
-  //   // audio.play()
-  // } else if (leadInvader % width === 3 && direction === width) {
-  //   direction = -1
-  // } else if (leadInvader % width === 0 && direction === -1) {
-  //   direction = width
-  // } else if (leadInvader % width === 0 && direction === width ) {
-  //   direction = 1
-  // } else {
-  //   direction
-  // }
+  
     
-    
-		
+  //* Alien Lazers --------------------------------------------------------------------------------------------------------
 
-  // const alienLazerId = setInterval(() => {
-  //   alienLazersMove()
-  // }, 5000)
- 
+
+
 		
   // function alienLazersMove() {
 
-  //   let alienLazerIndex =  aliens[Math.floor(Math.random() * aliens.length)]
+    
   //   // cells[alienLazerIndex].classList.add('alien-lazer')
   //   cells[alienLazerIndex].classList.remove('alien-lazer')
   //   alienLazerIndex += width
@@ -329,13 +249,14 @@ function init() {
   //     cells[alienLazerIndex].classList.add('blast')
   //     cells[alienLazerIndex].classList.remove('alien-lazer')
   //     cells[alienLazerIndex].classList.remove('lazer')
-  //     clearInterval(alienLazerId)
+  //     // clearInterval(alienLazerId)
 			
   //     setTimeout(() => {
   //       cells[alienLazerIndex].classList.remove('blast')
   //     }, 500)
   //   }
   // }
+  // alienLazersMove()
 	
   // } else if (cells[alienLazerIndex].classList.contains('lazer')) {
   //   cells[alienLazerIndex].classList.remove('alien-lazer')
@@ -358,39 +279,23 @@ function init() {
 
 
 	
-  function lastRow() {
 
-    // const playerCollision = aliens.some(item => {
-    //   return cells[item].classList.contains('player')
-    // })
-		
-    // if (playerCollision === true) {
-    //   gameOver()
-    //   return
-    // }
-    aliens.forEach(item => {
-      if (cells[item].classList.contains('danger-row')) {
-        return isPlayerDead = true
-      }
-    })
-    gameOver()
-    // for (let i = 0; i <= dangerRow.length; i++) {
-    //   if (cells[i].classList.contains('invader') && ) {
-    //     return isPlayerDead = true
-    //   }
-    // }
-    
-  }
 	
   //* Corona -------------------------------------------------------------------------------------------------------
 	
   
   setTimeout(() => {
-		
+
+  
     const coronaId = setInterval(() => {
+
       cells[coronaIndex].classList.remove('corona-alien')
+      // coronaTime()
       moveCorona()
+      
       console.log('corona mving')
+			
+			
     }, 500) 
 			
     function moveCorona() {
@@ -398,49 +303,85 @@ function init() {
       if (coronaIndex === width) {
         clearInterval(coronaId)
       } else {
-        cells[coronaIndex].classList.add('corona-alien')
-      }
+        cells[coronaIndex].classList.add('corona-alien') 
+      }	
     }
-    
-    
-  }, 500000)
+		
+    if (cells[coronaIndex].classList.contains('lazer')) {
+      console.log('corona been hit!')
+      cells[coronaIndex].classList.remove('corona-alien')
+      cells[coronaIndex].classList.remove('lazer')
+      cells[coronaIndex].classList.add('blast')
+      result = + 100000
+      score.textContent = result 
+    }
+
+  }, 5000)
 	
+  // function coronaTime() {
+  //   if (cells[coronaIndex].classList.contains('lazer')) {
+  //     console.log('Corona Mother been hit!')
+  //   }
+  // }
+
+  // audio.src = 'assets/Cowboy Woo Hoo.wav'
+  // audio.play()
+ 
 
 
+  //* Danger Row --------------------------------------------------------------------------------------------------------
+	
+  function lastRow() {
 
-
-
+    dangerRow.forEach(item => {
+      if (cells[item].classList.contains('invader')) {
+        isPlayerDead = true
+        gameOver()
+      }
+      
+    })
+    // aliens.forEach(item => {
+    //   if (cells[item].classList.contains('danger-row')) {
+    //     return isPlayerDead = true  
+    //   }
+   
+    // })
+	
+  }
 	
 
 
   //* Won Game --------------------------------------------------------------------------------------------------------
 	
-  if (alienInvadersKilled.length === aliens.length) {
-    score.textContent = 'You won!'
+  function wonGame() {
+    if ((aliens.length === 4)) {
+      score.textContent = 'You Won!'
+      score.classList.add('blink')
+      for (let i = 0; i < 1000; i++) {
+        clearInterval(i)
+      }
+    } else if (result >= 100000) {
+      score.textContent = 'Winner!'
+      score.classList.add('blink')
+      console.log('You won!')
+    }
   }
+  
+
 
 
 
   //* End Game --------------------------------------------------------------------------------------------------------
 	
   function gameOver() {
-
-
     if (isPlayerDead === true) {
-      console.log('GAME OVER ')
       score.textContent = 'GAME OVER'
+      score.classList.add('blink')
       for (let i = 0; i < 1000; i++) {
         clearInterval(i)
       }
-    }
-    // dangerRow.forEach(item => {
-    //   if (cells[item].classList.contains('invader')) {
-    //     isPlayerDead = true
-    //     cells[aliens].classList.remove('invader')
-    //     cells[aliens].classList.remove('player')
-
-    //   } 
-    // })
+    } 
+	
   }
 	
 
@@ -462,23 +403,27 @@ function init() {
   // }
  
 	
-  function restartClicked(event) {
-    result = 0
-    score.textContent = 0
-    console.log('restart btn clicked')
-    cells.forEach(item => {
-      // cells[item].classList.add('invader')
-      // cells[item].classList.add('lazer')
-      // cells[item].classList.add('aien-lazer')
-      // cells[item].classList.add('player')
-      // cells[item].classList.add('block')
-      grid[item].classList.remove('invader')
-      grid[item].classList.remove('lazer')
-      grid[item].classList.remove('aien-lazer')
-      grid[item].classList.remove('player')
-      grid[item].classList.remove('block')
-    })
-  }
+  // function restartClicked(event) {
+  //   result = 0
+  //   score.textContent = 0
+  //   console.log('restart btn clicked')
+  //   if (event.target) {
+  //     cells.forEach(item => {
+  //     // cells[item].classList.add('invader')
+  //     // cells[item].classList.add('lazer')
+  //     // cells[item].classList.add('aien-lazer')
+  //     // cells[item].classList.add('player')
+  //     // cells[item].classList.add('block')
+  //       cells[item].classList.remove('invader')
+  //       cells[item].classList.remove('lazer')
+  //       cells[item].classList.remove('aien-lazer')
+  //       cells[item].classList.remove('player')
+  //       cells[item].classList.remove('block')
+  //     })
+  //   }
+    
+
+  // }
 
 
   //* Event Listeners --------------------------------------------------------------------------------------------------------
@@ -486,12 +431,9 @@ function init() {
   
   document.addEventListener('keydown', moveShooter)
   document.addEventListener('keydown', moveLazerBeam)
-  
+  startBtn.addEventListener('click', startGame)
   // document.addEventListener('keydown', moveLazerUp)
-  clickedBtn.forEach(button => {
-    startBtn.addEventListener('click', startGame)
-    restartBtn.addEventListener('click', restartClicked)
-  })
+ 
 }	
 
 window.addEventListener('DOMContentLoaded', init)

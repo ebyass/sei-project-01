@@ -5,8 +5,10 @@
 body {
   height: 100vh;
 	margin: 0;
-	background-image: url('../assets/sky\ background.png');
+	background-color: black;
+	/* background-image: url('../assets/sky\ background.png'); */
 	/* background-image: url('../assets/SecondGIF.gif'); */
+	background-image: url('../assets/photo-1528818955841-a7f1425131b5.jpeg');
 	padding: 50px;
 }
 
@@ -27,7 +29,7 @@ body {
 .grid {
 	background-image: url('../assets/SpaceGIF.gif');
 	align-items: center;
-	/* box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.2); */
+	box-shadow: 0 0 30px 0 rgba(255, 83, 217, 0.9);
 	/* background-image: url('../assets/pngwave\ \(1\).png'); */
   display: flex;
   flex-wrap: wrap;
@@ -39,22 +41,44 @@ body {
 }
 
 .grid div {
-	border: 1px solid lightgrey;
+	/* border: 1px solid lightgrey; */
 	color: white;
   flex-grow: 1;
   height: 6.5%; 
 	width: 6.5%;
+	/* margin: 20px; */
 }
+
+.about-game {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 40px;
+	font-size: 30px;
+	color: white;
+	/* font-family: 'Acme', sans-serif; */
+	height: 500px;
+	width: 300px;
+	text-align: center;
+	/* font-family: 'Press Start 2P', cursive; */
+	font-family: 'Creepster', cursive;
+	border: 2px solid white 
+	
+	
+}
+
+
 
 .title {
 display: flex;
-color: #C04CFD;
-font-family: 'Acme', sans-serif;
+/* color: #C04CFD; */
+color: blue;
+font-family: 'VT323', monospace;
 justify-content: center;
-font-size: 50px;
+font-size: 75px;
 /* text-shadow: #00EB15 1px 0 10px */
 /* text-shadow: 2px 2px 5px rgb(161, 161, 161); */
-text-shadow: 1px 1px 2px #00EB15, 0 0 25px blue, 0 0 5px darkblue
+text-shadow: 5px 4px 5px #00EB15, 0 0 25px #C04CFD, 0 0 10px darkblue
 /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
 }
 
@@ -72,11 +96,11 @@ margin: auto;
 .score-display {
 	
 	background-color: #00EB15;
-	border: 2px solid black;
+	border: 2px solid blue;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: flex-start;
 	padding: 10px;
-	width: 150px;
+	width: 250px;
 	height: 50px;
 	font-size: 20px;
 	font-family: 'Acme', sans-serif;
@@ -88,6 +112,8 @@ margin: auto;
 
 .blink {
 	animation: blinker 1s step-start infinite;
+	background-color: crimson;
+	color: white;
 }
 @keyframes blinker {
 	50% {
@@ -102,7 +128,9 @@ margin: auto;
 
 #start {
 	background-color: #00EB15;
-	border: 2px solid black;
+	border: 2px solid blue;
+	display: flex;
+	justify-content: center;
 	width: 150px;
 	height: 50px;
 	font-size: 20px;
@@ -118,13 +146,12 @@ margin: auto;
   background-image: url('../assets/hand-sanitizer-png-3-transparent.png');
   background-repeat: no-repeat;
   background-size: contain;
-	cursor: pointer;
-
 }
 
 
 .grid div.invader {
-	background-image: url('../assets/pngwave\ virus.png');
+	/* background-image: url('../assets/pngwave\ virus.png'); */
+background-image: url('../assets/virus.png');
 	border-radius: 10px;
 	background-repeat: no-repeat;
 	background-size: contain;
