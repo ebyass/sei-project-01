@@ -318,32 +318,19 @@ function init() {
 			
     function moveCorona() {
       coronaIndex -= 1 
+
       if (coronaIndex === width) {
         clearInterval(coronaId)
       } else {
         cells[coronaIndex].classList.add('corona-alien') 
       }	
     }
-		
-    if (cells[coronaIndex].classList.contains('lazer')) {
-      console.log('corona been hit!')
-      cells[coronaIndex].classList.remove('corona-alien')
-      cells[coronaIndex].classList.remove('lazer')
-      cells[coronaIndex].classList.add('blast')
-      result = + 100000
-      score.textContent = result 
-    }
 
-  }, 5000)
+
+  }, 15000)
 	
-  // function coronaTime() {
-  //   if (cells[coronaIndex].classList.contains('lazer')) {
-  //     console.log('Corona Mother been hit!')
-  //   }
-  // }
 
- 
- 
+
 
 
   //* Danger Row --------------------------------------------------------------------------------------------------------

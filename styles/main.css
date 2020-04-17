@@ -63,11 +63,11 @@ body {
 	/* font-family: 'Press Start 2P', cursive; */
 	font-family: 'Creepster', cursive;
 	/* border: 2px solid white  */
-	
-	
 }
 
-
+.spacing {
+	padding-bottom: 15px; 
+}
 
 .title {
 display: flex;
