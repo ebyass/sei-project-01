@@ -38,11 +38,15 @@ This was my first project  for General Assembly’s SEI course and my first proj
 
 The player controls the hand sanitiser spaceship and can move along the bottom of the grid from left to right. The player can shoot upwards at the invading alien virus by pressing the spacebar, which sends a gel lazer up the grid. If the lazer hits one of the aliens, the alien is removed from the grid. 
 
+![homepage](/Users/eleanorbyass/development/PROJECTS/sei-project-one-game/assets/1.1.png)
+
 The invading aliens are programmed to move automatically once the game starts. They move from left to right and down a row each time they reach the side of the grid. 
 
 # Features
 
 My favourite feature for this game is the ‘mothership’ of Corona beers that appears at random at the top of the grid. If a player manages to hit this they are rewarded with double bonus points. Other features include sound effects, an arcade style blinking scoreboard 
+
+![mothership](/Users/eleanorbyass/development/PROJECTS/sei-project-one-game/assets/1.2.png)
 
 # Challenges 
 
