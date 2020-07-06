@@ -1,6 +1,6 @@
 function init() {
 	
-  //* DOM Elements --------------------------------------------------------------------------------------------------------
+  //* DOM Elements 
 
   const grid = document.querySelector('.grid')
   const cells = []
@@ -10,7 +10,8 @@ function init() {
   const audio = document.querySelector('audio')
 
 
-  //* Game Elements --------------------------------------------------------------------------------------------------------
+  //* Game Elements
+	
   const width = 15
   const cellCount = width * width
   let shooterIndex = 217
@@ -19,6 +20,7 @@ function init() {
   let direction = 1
   let coronaIndex = 29
   let isPlayerDead = false
+	
   
   let leadInvader = 0
   let aliens = [ 
@@ -37,11 +39,14 @@ function init() {
   ]
 	
 
+  const lazerRow = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+  ]
 	
 
 
 
-  //* Execution --------------------------------------------------------------------------------------------------------
+  //* Execution 
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
@@ -53,7 +58,7 @@ function init() {
   }
   createGrid()
 	
-  //* Start Game --------------------------------------------------------------------------------------------------------
+  //* Start Game 
 	
   function startGame() {
 
@@ -75,16 +80,12 @@ function init() {
     
   }
 
-  //* Player Movement --------------------------------------------------------------------------------------------------------
+  //* Player Movement 
 
 
 	
 	
   function moveShooter(event){
-
-
-    
-		
     cells[shooterIndex].classList.remove('player')
     const x = shooterIndex % width
     switch (event.keyCode) {
@@ -102,7 +103,7 @@ function init() {
   }
 	
 
-  //* Players Lazer --------------------------------------------------------------------------------------------------------
+  //* Players Lazer 
   
   function moveLazerBeam() {
 
@@ -130,31 +131,42 @@ function init() {
       // wonGame()
       cells[lazerIndex].classList.add('lazer')
 			
+      //! Added code to replace massive if statement ----------------------------------
+      // for (let i = 0; i < lazerRow.length; i++) {
+      //   if (lazerIndex === i) {
+      //     cells[lazerIndex].classList.remove('lazer')
+      //     clearInterval(lazerId)
+      //   }
+      // }
+			
+
+
+      //! -------------------------------------------------------------------------------------------
 			
       if (lazerIndex === 0 || lazerIndex === 1 || lazerIndex === 2 || lazerIndex === 3 || lazerIndex === 4 || lazerIndex === 5 || lazerIndex === 6 || lazerIndex === 7 || lazerIndex === 8 || lazerIndex === 9 || lazerIndex === 10 || lazerIndex === 11 || lazerIndex === 12 || lazerIndex === 13 || lazerIndex === 14) {
         cells[lazerIndex].classList.remove('lazer')
         clearInterval(lazerId)
       } else if ((cells[lazerIndex].classList.contains('alien-lazer'))) {
-				
         clearInterval(lazerId)
-				
-        cells[lazerIndex].classList.remove('invader')
-        cells[lazerIndex].classList.remove('lazer')
-        cells[lazerIndex].classList.remove('alien-lazer')
+        cells[lazerIndex].classList.remove('invader', 'lazer', 'alien-lazer')
       } else if (cells[lazerIndex].classList.contains('invader')){
-        clearInterval(lazerId)
         
+        clearInterval(lazerId)
+
         cells[lazerIndex].classList.add('blast')
+        cells[lazerIndex].classList.remove('invader', 'lazer', 'alien-lazer')
+				
         result += 5000
         score.textContent = result
 				
-        cells[lazerIndex].classList.remove('invader')
-        cells[lazerIndex].classList.remove('lazer')
-        cells[lazerIndex].classList.remove('alien-lazer')
+        const alienKilled = lazerIndex
+        aliens.pop(alienKilled)
+        console.log('aliens', aliens.length)
 
-        const aliensKilled = aliens.indexOf(lazerIndex)
-        aliens.pop(aliensKilled)
-        alienInvadersKilled.push(aliensKilled)
+        //const alienKilled = aliens.indexOf(lazerIndex) //? alienKilled is cell that contains alien from alien array and lazerIndex
+        //console.log('lazerIndex', lazerIndex)
+        // aliens.pop(alienKilled)
+        // alienInvadersKilled.push(alienKilled)
 				
         setTimeout(() => {
           cells[lazerIndex].classList.remove('blast')
@@ -186,7 +198,7 @@ function init() {
   
 	
 	
-  //* Invaders Move --------------------------------------------------------------------------------------------------------
+  //* Invaders Move 
 
   function moveInvaders() {
 		
@@ -247,7 +259,7 @@ function init() {
 		
   
     
-  //* Alien Lazers --------------------------------------------------------------------------------------------------------
+  //* Alien Lazers 
 
 
 
@@ -299,7 +311,7 @@ function init() {
 	
 
 	
-  //* Corona -------------------------------------------------------------------------------------------------------
+  //* Corona Mothership
 	
   
   setTimeout(() => {
@@ -311,7 +323,7 @@ function init() {
       // coronaTime()
       moveCorona()
       
-      console.log('corona mving')
+
 			
 			
     }, 500) 
@@ -333,7 +345,7 @@ function init() {
 
 
 
-  //* Danger Row --------------------------------------------------------------------------------------------------------
+  //* Danger Row 
 	
   function lastRow() {
   
@@ -357,7 +369,7 @@ function init() {
 	
 
 
-  //* Won Game --------------------------------------------------------------------------------------------------------
+  //* Won Game
 	
   function wonGame() {
     if ((aliens.length === 4) || (result >= 100000)) {
@@ -367,8 +379,6 @@ function init() {
       for (let i = 0; i < 1000; i++) {
         clearInterval(i)
       } 
-      
-    
     }
   }
   
@@ -376,7 +386,7 @@ function init() {
 
 
 
-  //* End Game --------------------------------------------------------------------------------------------------------
+  //* End Game 
 	
   function gameOver() {
     if (isPlayerDead === true) {
@@ -431,14 +441,13 @@ function init() {
   // }
 
 
-  //* Event Listeners --------------------------------------------------------------------------------------------------------
+  //* Event Listeners 
   
   
   document.addEventListener('keydown', moveShooter)
   document.addEventListener('keydown', moveLazerBeam)
   startBtn.addEventListener('click', startGame)
   // document.addEventListener('keydown', moveLazerUp)
- 
 }	
 
 window.addEventListener('DOMContentLoaded', init)
