@@ -51,7 +51,6 @@ function init() {
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {
       const cell = document.createElement('div')
-      // cell.textContent = i
       grid.appendChild(cell)
       cells.push(cell)
     }
@@ -81,9 +80,6 @@ function init() {
   }
 
   //* Player Movement 
-
-
-	
 	
   function moveShooter(event){
     cells[shooterIndex].classList.remove('player')
@@ -320,11 +316,7 @@ function init() {
     const coronaId = setInterval(() => {
 
       cells[coronaIndex].classList.remove('corona-alien')
-      // coronaTime()
       moveCorona()
-      
-
-			
 			
     }, 500) 
 			
@@ -337,7 +329,6 @@ function init() {
         cells[coronaIndex].classList.add('corona-alien') 
       }	
     }
-
 
   }, 15000)
 	
