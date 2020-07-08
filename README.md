@@ -21,7 +21,7 @@ Design a grid-based game using HTML, CSS and JavaScript technologies learn in th
 
 # Deployment:
 
-This game has been deployed on HitHub Pages and can be found [here](https://ebyass.github.io/sei-project-01/)
+This game has been deployed on GitHub Pages and can be found [here](https://ebyass.github.io/sei-project-01/)
 
 # Getting started
 
