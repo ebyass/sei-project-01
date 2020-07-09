@@ -36,11 +36,15 @@ This was my first project  for General Assembly’s SEI course and my first proj
 
 # Game Architecture 
 
-The player controls the hand sanitiser spaceship and can move along the bottom of the grid from left to right. The player can shoot upwards at the invading alien virus by pressing the spacebar, which sends a gel lazer up the grid. If the lazer hits one of the aliens, the alien is removed from the grid. 
+The player controls the hand sanitiser spaceship and can move along the bottom of the grid from left to right. Building the grid and the player on the grid was the first thing I created and a fun challenge to implement the movement. My plan was to build a fully functioning game and then add styling. The player can shoot upwards at the invading alien virus by pressing the spacebar, which sends a gel lazer up the grid. Shooting lazers was my second big feature to add and slightly more challenging. If the lazer hits one of the aliens, the alien is removed from the grid and the player's score increases. 
 
 ![homepage](/assets/1.1.png)
 
-The invading aliens are programmed to move automatically once the game starts. They move from left to right and down a row each time they reach the side of the grid. 
+The invading aliens are programmed to move automatically once the game starts. They move from left to right and down a row each time they reach the side of the grid. There is a bug in the movement of the alien array which I discuss later on. 
+
+# Build 
+
+My approach at the start of the project was to flesh out a wireframe. This was a simple design which I then built on with pseudo-coded features that I wanted to add. This helped me decide what to focus on for each stage of the project and helped me stay on target. This planning stage was very beneficial in helping me make time saving decisions such as creating the grid with a for loop in the DOM that was created when the DOM Content Loaded. This saved me hard coding 100 different divs in the HTML and instead the grid generated grid itself.
 
 # Features
 
@@ -113,6 +117,10 @@ I chose to create the grid using a for loop in the DOM which was created when th
   }
 ```
 
+# Bugs 
+
+The movement of the alien array was by far my most challenging feature and unfortunately there was a bug I was not able to finish in time. Due to the movement of such a large array there are a few 'aliens' that seem to break away from the formation and get stuck where they are. This is an issue I plan to go back and resolve. I would also like to go through and refactor my code as this was also something I had planned to do but ran out of time. 
+
 # Key learnings
 
 1. Approaching problems: I learnt the hard way the importance of thorough planning. I wrote out my ideas in pseudo coding but with hindsight this was not enough. For future projects I will definitely be using platforms to help me with wireframes as it will be easier to follow plans and  meet targets throughout the week.
@@ -125,7 +133,7 @@ I chose to create the grid using a for loop in the DOM which was created when th
 
 # Future improvements: 
 
-If I had more time I would have liked to refactor my code. There are also a few more features I would like to add:
+If I had more time I would have liked to add the following features:
 * A leaderboard 
 * Different pages the user can view depending on their score 
 * Make the design responsive 
