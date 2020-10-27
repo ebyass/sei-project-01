@@ -40,15 +40,15 @@ The player controls the hand sanitiser spaceship and can move along the bottom o
 
 ![homepage](/assets/1.1.png)
 
-The invading aliens are programmed to move automatically once the game starts. They move from left to right and down a row each time they reach the side of the grid. There is a bug in the movement of the alien array which I discuss later on. 
+The invading aliens are programmed to move automatically once the game starts. They move from left to right and down a row each time they reach the side of the grid. There is a bug in the movement of the alien array which I will discuss later on. 
 
 # Build 
 
-My approach at the start of the project was to flesh out a wireframe. This was a simple design which I then built on with pseudo-coded features that I wanted to add. This helped me decide what to focus on for each stage of the project and helped me stay on target. This planning stage was very beneficial in helping me make time saving decisions such as creating the grid with a for loop in the DOM that was created when the DOM Content Loaded. This saved me hard coding 100 different divs in the HTML and instead the grid generated grid itself.
+My approach at the start of the project was to flesh out a wireframe. This was a simple design which I built on, pseudo-coding features that I wanted to add. This helped me maintain focus for each stage of the project and stay on target. This planning stage was beneficial, helping me to make time saving decisions like creating a grid when the DOM Content Loaded with a for loop. This saved me from hard coding 100 different divs in the HTML.
 
 # Features
 
-My favourite feature for this game is the ‘mothership’ of Corona beers that appears at random at the top of the grid. If a player manages to hit this they are rewarded with double bonus points. Other features include sound effects, an arcade style blinking scoreboard 
+My favourite feature for this game is the Mothership of Corona beers that appears at random at the top of the grid. If a player manages to hit this they are rewarded with double bonus points. Other features include sound effects and an arcade style blinking scoreboard 
 
 ![mothership](/assets/1.2.png)
 
@@ -79,7 +79,7 @@ function removeInvaders() {
 
 # Wins
 
-My biggest achievement for this game was successfully implementing the mothership. I think it adds a fun and playful dimension to the game and proved to me my understanding of setInterval and setTimeout. 
+My biggest achievement for this game was successfully implementing the mothership. I think it adds a fun more game like dimension to Space Invaders and proved to me my understanding of setInterval and setTimeout. 
 
 ```
  setTimeout(() => {
@@ -105,7 +105,7 @@ My biggest achievement for this game was successfully implementing the mothershi
   }, 15000)
 ```
 
-I chose to create the grid using a for loop in the DOM which was created when the DOM Content Loaded. This was a great time saving technique that saved me having to hardcode 100 cells in HTML. 
+I chose to create the grid using a for loop in the DOM which was created when the DOM Content Loaded. This was a great time saving technique and meant I did not have to hardcode 100 cells in HTML. 
 
 ```
   function createGrid() {
@@ -123,10 +123,10 @@ The movement of the alien array was by far my most challenging feature and unfor
 
 # Key learnings
 
-1. Approaching problems: I learnt the hard way the importance of thorough planning. I wrote out my ideas in pseudo coding but with hindsight this was not enough. For future projects I will definitely be using platforms to help me with wireframes as it will be easier to follow plans and  meet targets throughout the week.
+1. Approaching problems: I learnt the hard way the importance of thorough planning. I wrote out my ideas in pseudo code but with hindsight this was not enough. For future projects I will definitely be using platforms to help me with wireframes as it will be easier to follow plans and  meet targets throughout the week.
 
 
-2. Debugging: I really learnt the value of console logging to make your way through debugging.
+2. Debugging: I really learnt the value of console logging and asking the right questions to make my way through the debugging process. 
 
 
 3. Set intervals 
